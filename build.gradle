@@ -1,0 +1,30 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'java'
+}
+
+group 'com.ar.tools'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.+'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.jsoup:jsoup:1.12.1'
+    implementation 'io.github.lizhangqu:coreprogress:1.0.2'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
