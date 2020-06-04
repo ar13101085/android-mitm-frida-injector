@@ -1,8 +1,10 @@
+
+
 build jar cmd
 ./gradlew shadowJar
 
 run jar
-java -jar mitm-f-1.0-SNAPSHOT-all.jar *.apk -d -f
+java -jar mitm-f.jar *.apk -d
 
 
 -d debug disable
