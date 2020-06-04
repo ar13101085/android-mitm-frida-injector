@@ -86,8 +86,22 @@ public class Main {
             configWrite(basePath, apkName);
 
             if(!isDontInjectFrida){
+                File file=new File(rootPath);
+
                 //smalli update
-                className=rootPath+"smali/"+className.replace(".","/")+".smali";
+                for (File singleFile:file.listFiles()
+                     ) {
+                    if(singleFile.isDirectory() && singleFile.getName().startsWith("smali")){
+                        File classFile=new File(rootPath+singleFile.getName()+"/"+className.replace(".","/")+".smali");
+                        if(classFile.exists()){
+                            className=classFile.getAbsolutePath();
+                            CmdExecutor.debugLog("Class name "+className);
+                            break;
+                        }
+                    }
+                }
+
+                //className=rootPath+"smali/"+className.replace(".","/")+".smali";
                 fridaContentInject(className);
                 //frida update
                 fridaLibCopy(rootPath);
