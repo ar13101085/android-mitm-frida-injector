@@ -218,7 +218,7 @@ public class ApkParser {
 
     public void buildApk(){
         //--use-aapt2
-        String buildCmd= "java -jar tools/apktool.jar b "+_apkFileManager.getDecompileDir()+" -o "+_apkFileManager.getBuildApkPath();
+        String buildCmd= "java -jar "+ConfigUtility.getToolsDir()+"apktool.jar b "+_apkFileManager.getDecompileDir()+" -o "+_apkFileManager.getBuildApkPath();
         ApkTweeksController tweeksController=new ApkTweeksController(_logger);
         int result=tweeksController.runCmd(buildCmd);
         if(result!=0){
