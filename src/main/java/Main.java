@@ -1,3 +1,4 @@
+import javafx.application.Application;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,7 +18,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        String apk="";
+        if(System.out.printf("%s","hello world")!=null){
+
+        }
+       /* String apk="";
+        //String apk="MX_Player_1.23.5.apk";
         boolean isDebugRemove=false;
         boolean isDontInjectFrida=false;
         boolean isMitmDisable=false;
@@ -121,132 +126,18 @@ public class Main {
 
             //apk-signer
             String cmd3="java -jar tools/uber-apk-signer.jar -a "+basePath+apkName+"_debug.apk";
+            System.out.println(cmd1);
+            System.out.println(cmd2);
+            System.out.println(cmd3);
             int signedResult=CmdExecutor.runCmd(cmd3,true);
             CmdExecutor.debugLog("Successfully complete all operation");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    private static void fridaContentInject(String className) {
-        String injectCode="# direct methods\n" +
-                ".method static constructor <clinit>()V\n" +
-                "    .locals 3\n" +
-                "    const-string v2, \"frida-gadget\"\n" +
-                "    invoke-static {v2}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V\n" +
-                "\n" +
-                "    return-void\n" +
-                ".end method\n\n";
-        boolean isFirstTime=false;
-        String smaliData=readFileData(className);
-        Scanner scanner=new Scanner(smaliData);
-        StringBuilder modifiedContent=new StringBuilder();
-        while (scanner.hasNext()){
-            String line=scanner.nextLine();
-            if(!isFirstTime && line.equalsIgnoreCase("# direct methods")){
-                modifiedContent.append(injectCode);
-                isFirstTime=true;
-            }
-            modifiedContent.append(line+"\n");
-        }
-        writeToFile(new File(className),modifiedContent.toString());
-    }
-
-    private static void fridaLibCopy(String basePath) {
-        String armeabi7FolderPath=basePath+"lib/armeabi-v7a";
-        File armeabi7Folder=new File(armeabi7FolderPath);
-        if(!armeabi7Folder.exists()){
-            armeabi7Folder.mkdir();
-        }
-
-        String arm64abi8FolderPath=basePath+"lib/arm64-v8a";
-        File arm64abi8Folder=new File(arm64abi8FolderPath);
-        if(!arm64abi8Folder.exists()){
-            arm64abi8Folder.mkdir();
-        }
-
-        String armeabi7Frida="tools/armeabi-v7a/libfrida-gadget.so";
-        String arm64abi8Frida="tools/arm64-v8a/libfrida-gadget.so";
-
-        try {
-            FileUtils.copyFileToDirectory(new File(armeabi7Frida),armeabi7Folder);
-            FileUtils.copyFileToDirectory(new File(arm64abi8Frida),arm64abi8Folder);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+*/
 
     }
 
-    private static void configWrite(String basePath, String apkName) throws IOException {
-        File xmlDir=new File(basePath+apkName+"/res/xml");
-        if(!xmlDir.exists()){
-            xmlDir.mkdir();
-        }
-        File xmlFile=new File(xmlDir.getAbsolutePath(),"net_config.xml");
-        String netConfig="<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                "<network-security-config>\n" +
-                "    <base-config cleartextTrafficPermitted=\"true\">\n" +
-                "        <trust-anchors>\n" +
-                "            <certificates src=\"system\" />\n" +
-                "        </trust-anchors>\n" +
-                "    </base-config>\n" +
-                "</network-security-config>";
-        writeToFile(xmlFile, netConfig);
-    }
 
-    private static void writeToFile(File file, String data) {
-        try {
-            FileWriter writer=new FileWriter(file);
-            PrintWriter printWriter=new PrintWriter(writer);
-            printWriter.print(data);
-            printWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String readFileData(String path){
-        try {
-            FileReader fileReader=new FileReader(path);
-            StringBuilder sb=new StringBuilder();
-            int i;
-            while((i=fileReader.read())!=-1)
-                sb.append((char)i);
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    private static String writeXmlDocumentToXmlFile(Document xmlDocument)
-    {
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer transformer;
-        try {
-            transformer = tf.newTransformer();
-
-            // Uncomment if you do not require XML declaration
-            // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-
-            //A character stream that collects its output in a string buffer,
-            //which can then be used to construct a string.
-            StringWriter writer = new StringWriter();
-
-            //transform document to string
-            transformer.transform(new DOMSource(xmlDocument), new StreamResult(writer));
-
-            String xmlString = writer.getBuffer().toString();
-            return xmlString;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return "";
-    }
 }

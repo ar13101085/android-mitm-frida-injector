@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxMainController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="151.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="appSetting" contentDisplay="TOP" mnemonicParsing="false" onAction="#settingClick" prefHeight="94.0" prefWidth="154.0" text="Setting">
+                     <graphic>
+                        <ImageView fitHeight="79.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Windows_Settings_app_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buildApkButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buildApkButtonClick" prefHeight="94.0" prefWidth="154.0" text="Build APK">
+                     <graphic>
+                        <ImageView fx:id="buildApkIV" fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@build.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="installApkButton" contentDisplay="TOP" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" onAction="#installApkButtonClick" prefHeight="94.0" prefWidth="154.0" text="Install APK">
+                     <graphic>
+                        <ImageView fx:id="installApkIV" fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@install.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open in explorer">
+                     <graphic>
+                        <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@open_with_explorer.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open with JD-GUI">
+                     <graphic>
+                        <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@jd-gui.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open with VSCode">
+                     <graphic>
+                        <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@vscode.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </VBox>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="556.0">
+                     <children>
+                        <TabPane minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0">
+                          <tabs>
+                            <Tab text="Apk Info">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <tabs>
+                                              <Tab text="Basic Info">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                </content>
+                                              </Tab>
+                                              <Tab text="Activity List">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                </content>
+                                              </Tab>
+                                                <Tab text="Permission List">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                   </content>
+                                                </Tab>
+                                                <Tab text="Native Lib  Info">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                   </content>
+                                                </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Apk Tweeks">
+                                 <content>
+                                    <VBox alignment="CENTER" spacing="16.0">
+                                       <children>
+                                          <Button fx:id="decompileButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#decompile" prefHeight="50.0" prefWidth="300.0" text="Decompile">
+                                             <graphic>
+                                                <ImageView fx:id="decompileButtonImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="signatureBypassButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#signatureBypass" prefHeight="50.0" prefWidth="300.0" text="Signature Bypass">
+                                             <graphic>
+                                                <ImageView fx:id="signatureBypassButtonIV" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="fridaInjectButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onAction="#fridaInject" prefHeight="50.0" prefWidth="300.0" text="Frida-Gadget Inject">
+                                             <graphic>
+                                                <ImageView fx:id="fridaInjectButtonIV" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="enableDebugButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#enableDebuggingClick" prefHeight="50.0" prefWidth="300.0" text="Enable Debuging">
+                                             <graphic>
+                                                <ImageView fx:id="enableDebugButtonIV" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="enableMitmButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#enableMitmButtonClick" prefHeight="50.0" prefWidth="300.0" text="Enable MITM">
+                                             <graphic>
+                                                <ImageView fx:id="enableMitmButtonIV" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="sslBypassButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" onAction="#sslBypassButtonClick" prefHeight="50.0" prefWidth="300.0" text="SSL Bypass">
+                                             <graphic>
+                                                <ImageView fx:id="sslBypassButtonIV" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@what.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                            </Tab>
+                              <Tab text="Decompile">
+                                 <content>
+                                    <VBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="CFR Decompile">
+                                                   <graphic>
+                                                      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@done.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="VSCode Open" />
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Explorer Open" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Procryon Decompile">
+                                                   <graphic>
+                                                      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@wait.gif" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="VSCode Open">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Explorer Open" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </Tab>
+                              <Tab text="ADB Log">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="Frida">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="Console Output">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                          </tabs>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                        </TabPane>
+                        <AnchorPane prefHeight="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="apkChooserButton" mnemonicParsing="false" onAction="#chooseApkFile" text="Choose APK" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="Apple SD GothicNeo ExtraBold" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="87.0" mnemonicParsing="false" prefWidth="100.0" text="APK INFO" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="556.0">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" prefViewportHeight="324.0" prefViewportWidth="556.0" vbarPolicy="ALWAYS">
+                           <content>
+                              <TextFlow fx:id="textFLow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </TextFlow>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

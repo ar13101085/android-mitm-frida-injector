@@ -9,14 +9,23 @@ public class CmdExecutor {
         try {
             Process process = Runtime.getRuntime().exec(cmd);
 
-            BufferedReader reader = new BufferedReader(
+            BufferedReader outputReader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
+
+            BufferedReader errorReader = new BufferedReader(
+                    new InputStreamReader(process.getErrorStream()));
+
 
 
             if(isShowOutput){
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = outputReader.readLine()) != null) {
                     System.out.println(line);
+                }
+
+                String error;
+                while ((error = errorReader.readLine()) != null) {
+                    System.out.println(error);
                 }
             }
             int exitVal = process.waitFor();
@@ -29,7 +38,7 @@ public class CmdExecutor {
     }
 
     public static void debugLog(String data){
-        runCmd("echo "+data);
+        runCmd("echo "+data,true);
     }
 
     public static String runCmd(String cmd){

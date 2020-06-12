@@ -1,0 +1,15 @@
+# 获取签名信息
+apk.signed=/Users/hello/Documents/Apk/aostv_v18.0.9.apk
+
+# 要处理的APK
+apk.src=/Users/hello/Documents/Apk/aostv_v18.0.9.apk
+
+# 写出的APK名
+apk.out=/Users/hello/Documents/Apk/aostv_v18.0.9_out_sb.apk
+
+# 签名配置
+sign.enable=true
+sign.file=/Users/hello/Documents/Decompile/tools/SignatureBypass/test.keystore
+sign.password=123456
+sign.alias=user
+sign.aliasPassword=654321
