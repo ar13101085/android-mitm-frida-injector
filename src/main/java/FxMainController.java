@@ -20,10 +20,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import model.KeyValue;
-import utility.ApkFileManager;
-import utility.ApkParser;
-import utility.ResourceManager;
-import utility.SystemUtility;
+import utility.*;
+import utility.filetree.FileTreeUtility;
 
 import java.io.File;
 
@@ -57,6 +55,9 @@ public class FxMainController {
 
     @FXML
     private Tab nativeLibListTab;
+
+    @FXML
+    private Text nativeLibDirTextArea;
 
     @FXML
     private TextArea manifestTextArea;
@@ -103,6 +104,25 @@ public class FxMainController {
     @FXML
     private TextFlow textFLow;
 
+
+
+    @FXML
+    void apkDetailsInfoClick(ActionEvent event) {
+        System.out.println("apkDetailsInfoClick");
+        if(_apkParser==null){
+            Toast.show("Please select an apk..",textFLow);
+            return;
+        }
+        if(!_apkParser.isDecompileComplete()){
+            decompile(null);
+        }
+        _apkParser.getApkInformation(permissionList,activityList,serviceList,appInfo);
+        manifestTextArea.setText(_apkParser.getManifestDetails());
+        String fileTree=FileTreeUtility.getFileTreeStructure(new File(_apkManager.getDecompileDir()+"/lib"));
+        System.out.println(fileTree);
+        nativeLibDirTextArea.setText(fileTree);
+    }
+
     @FXML
     void settingClick(ActionEvent event) {
         FxApp.switchScreen(appSetting,"root");
@@ -137,7 +157,9 @@ public class FxMainController {
         changeImage(decompileButtonImageView,ResourceManager.WAIT_IMAGE);
         new Thread(()->{
             _apkParser.decompileApk();
+
             Platform.runLater(()->{
+                Toast.show("Decompile done.",textFLow);
                 checkApkStatus();
             });
         }).start();
@@ -329,23 +351,25 @@ public class FxMainController {
         initPermissionInfo();
         initActivityListInfo();
         initServiceListInfo();
-        initNativeListInfo();
     }
 
-    private void initPermissionInfo() {
-        ObservableList<KeyValue> items = FXCollections.observableArrayList (
-                new KeyValue("","----")
+    ObservableList<KeyValue> permissionList = FXCollections.observableArrayList ();
+    ObservableList<KeyValue> activityList = FXCollections.observableArrayList ();
+    ObservableList<KeyValue> serviceList = FXCollections.observableArrayList ();
+    ObservableList<KeyValue> appInfo = FXCollections.observableArrayList ();
 
-        );
+    private void initPermissionInfo() {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
         try {
             Node root=loader.load();
             permissionInfoTab.setContent(root);
             BasicAndroidAppInfoController _appController = loader.getController();
-            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+            _appController.setData(permissionList, (listview)->new KeyValueListCell(new ICallback() {
                 @Override
                 public <T> void receivedData(int code, boolean isSuccess, T data) {
-                    System.out.println(data);
+                    KeyValue keyValue= (KeyValue) data;
+                    SystemUtility.copyToClipboard(keyValue.value,textFLow);
                 }
             }));
         } catch (Exception e) {
@@ -354,19 +378,17 @@ public class FxMainController {
     }
 
     private void initActivityListInfo() {
-        ObservableList<KeyValue> items = FXCollections.observableArrayList (
-                new KeyValue("","----")
 
-        );
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
         try {
             Node root=loader.load();
             activityTabList.setContent(root);
             BasicAndroidAppInfoController _appController = loader.getController();
-            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+            _appController.setData(activityList, (listview)->new KeyValueListCell(new ICallback() {
                 @Override
                 public <T> void receivedData(int code, boolean isSuccess, T data) {
-                    System.out.println(data);
+                    KeyValue keyValue= (KeyValue) data;
+                    SystemUtility.copyToClipboard(keyValue.value,textFLow);
                 }
             }));
         } catch (Exception e) {
@@ -375,40 +397,17 @@ public class FxMainController {
     }
 
     private void initServiceListInfo() {
-        ObservableList<KeyValue> items = FXCollections.observableArrayList (
-                new KeyValue("","----")
 
-        );
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
         try {
             Node root=loader.load();
             serviceListTab.setContent(root);
             BasicAndroidAppInfoController _appController = loader.getController();
-            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+            _appController.setData(serviceList, (listview)->new KeyValueListCell(new ICallback() {
                 @Override
                 public <T> void receivedData(int code, boolean isSuccess, T data) {
-                    System.out.println(data);
-                }
-            }));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initNativeListInfo() {
-        ObservableList<KeyValue> items = FXCollections.observableArrayList (
-                new KeyValue("","----")
-
-        );
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
-        try {
-            Node root=loader.load();
-            nativeLibListTab.setContent(root);
-            BasicAndroidAppInfoController _appController = loader.getController();
-            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
-                @Override
-                public <T> void receivedData(int code, boolean isSuccess, T data) {
-                    System.out.println(data);
+                    KeyValue keyValue= (KeyValue) data;
+                    SystemUtility.copyToClipboard(keyValue.value,textFLow);
                 }
             }));
         } catch (Exception e) {
@@ -418,27 +417,17 @@ public class FxMainController {
 
     private void initBasicApkInfo() {
 
-        ObservableList<KeyValue> items = FXCollections.observableArrayList (
-                new KeyValue("App Name","----"),
-                new KeyValue("Package Name","----"),
-                new KeyValue("Application Class","----"),
-                new KeyValue("Main Activity","----"),
-                new KeyValue("Min SDK","----"),
-                new KeyValue("Target SDK","----"),
-                new KeyValue("Version Name","----"),
-                new KeyValue("Version Code","----"),
-                new KeyValue("APK Size","----")
 
-        );
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
         try {
             Node root=loader.load();
             apkBasicInfoTab.setContent(root);
             BasicAndroidAppInfoController _appController = loader.getController();
-            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+            _appController.setData(appInfo, (listview)->new KeyValueListCell(new ICallback() {
                 @Override
                 public <T> void receivedData(int code, boolean isSuccess, T data) {
-                    System.out.println(data);
+                    KeyValue keyValue= (KeyValue) data;
+                    SystemUtility.copyToClipboard(keyValue.value,textFLow);
                 }
             }));
         } catch (Exception e) {

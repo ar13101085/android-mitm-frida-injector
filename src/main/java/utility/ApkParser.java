@@ -2,18 +2,24 @@ package utility;
 
 import controller.ApkTweeksController;
 import infrustucture.ICallback;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.KeyValue;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import javax.lang.model.util.Elements;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -272,6 +278,93 @@ public class ApkParser {
     }
 
 
+    public String getManifestDetails(){
+        String manifest=xmlDocToString(getManifestXml());
+        return manifest;
+    }
+
+    public void getApkInformation(
+            ObservableList<KeyValue> permissionList,
+            ObservableList<KeyValue> activityList,
+            ObservableList<KeyValue> serviceList,
+            ObservableList<KeyValue> appInfo
+    ){
+
+        permissionList.clear();
+        activityList.clear();
+        serviceList.clear();
+        appInfo.clear();
+        Document doc=getManifestXml();
+
+        Element packageElement=(Element)doc.getElementsByTagName("manifest").item(0);
+        String packageName=packageElement.getAttribute("package");
+        Element applicationClass=(Element)doc.getElementsByTagName("application").item(0);
+        String applicationClassName = applicationClass.getAttribute("android:name");
+
+        String mainActivityClassName="";
+        NodeList launcherList=doc.getElementsByTagName("category");
+        for (int i = 0; i <launcherList.getLength() ; i++) {
+            Element launcherElement= (Element) launcherList.item(i);
+            if(launcherElement.hasAttribute("android:name") && launcherElement.getAttribute("android:name").equalsIgnoreCase("android.intent.category.LAUNCHER")){
+                Element activityNode= (Element) launcherElement.getParentNode().getParentNode();
+                //System.out.println(activityNode.getAttribute("android:name"));
+                mainActivityClassName=activityNode.getAttribute("android:name");
+                break;
+            }
+        }
+
+        try {
+            ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                    new KeyValue("App Name","----"),
+                    new KeyValue("Package Name",packageName),
+                    new KeyValue("Application Class",applicationClassName),
+                    new KeyValue("Main Activity",mainActivityClassName),
+                    new KeyValue("Min SDK","----"),
+                    new KeyValue("Target SDK","----"),
+                    new KeyValue("Version Name","----"),
+                    new KeyValue("Version Code","----"),
+                    new KeyValue("APK Size",SystemUtility.getStringSizeLengthFile(new File(_apkFileManager.getApkPath()).length()))
+
+            );
+            appInfo.addAll(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        NodeList elements = doc.getElementsByTagName("uses-permission");
+
+
+        for (int i = 0; i < elements.getLength(); i++) {
+            Element element= (Element) elements.item(i);
+            permissionList.add(new KeyValue("",element.getAttribute("android:name")));
+
+        }
+
+
+
+        NodeList activities = doc.getElementsByTagName("activity");
+
+
+        for (int i = 0; i < activities.getLength(); i++) {
+            Element element= (Element) activities.item(i);
+            activityList.add(new KeyValue("",element.getAttribute("android:name")));
+
+        }
+
+
+        NodeList serivices = doc.getElementsByTagName("service");
+
+
+        for (int i = 0; i < serivices.getLength(); i++) {
+            Element element= (Element) serivices.item(i);
+            serviceList.add(new KeyValue("",element.getAttribute("android:name")));
+
+        }
+    }
+
+
     //region utility
     public void configWrite() throws IOException {
         File xmlDir=new File(_apkFileManager.getDecompileDir()+"/res/xml");
@@ -299,8 +392,7 @@ public class ApkParser {
         try {
             transformer = tf.newTransformer();
 
-            // Uncomment if you do not require XML declaration
-            // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             //A character stream that collects its output in a string buffer,
             //which can then be used to construct a string.
