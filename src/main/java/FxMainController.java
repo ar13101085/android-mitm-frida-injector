@@ -1,47 +1,74 @@
+import controller.appinfo.BasicAndroidAppInfoController;
+import controller.appinfo.KeyValueListCell;
 import infrustucture.ICallback;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import model.KeyValue;
 import utility.ApkFileManager;
 import utility.ApkParser;
 import utility.ResourceManager;
+import utility.SystemUtility;
 
 import java.io.File;
 
 public class FxMainController {
-
+    @FXML
+    private Button appSetting;
 
     @FXML
-    private Button apkChooserButton;
+    private Button buildApkButton;
+
+    @FXML
+    private ImageView buildApkIV;
+
+    @FXML
+    private Button installApkButton;
 
     @FXML
     private ImageView installApkIV;
 
     @FXML
-    private Button signatureBypassButton;
+    private Tab apkBasicInfoTab;
+
+    @FXML
+    private Tab permissionInfoTab;
+
+    @FXML
+    private Tab activityTabList;
+
+    @FXML
+    private Tab serviceListTab;
+
+    @FXML
+    private Tab nativeLibListTab;
+
+    @FXML
+    private TextArea manifestTextArea;
+
+    @FXML
+    private Button decompileButton;
 
     @FXML
     private ImageView decompileButtonImageView;
 
     @FXML
-    private ImageView enableDebugButtonIV;
-
-    @FXML
-    private Button sslBypassButton;
-
-    @FXML
-    private Button appSetting;
+    private Button signatureBypassButton;
 
     @FXML
     private ImageView signatureBypassButtonIV;
@@ -50,34 +77,31 @@ public class FxMainController {
     private Button fridaInjectButton;
 
     @FXML
-    private Button decompileButton;
+    private ImageView fridaInjectButtonIV;
 
     @FXML
     private Button enableDebugButton;
 
     @FXML
-    private ImageView buildApkIV;
-
-    @FXML
-    private Button buildApkButton;
-
-    @FXML
-    private ImageView fridaInjectButtonIV;
-
-    @FXML
-    private Button installApkButton;
+    private ImageView enableDebugButtonIV;
 
     @FXML
     private Button enableMitmButton;
 
     @FXML
-    private TextFlow textFLow;
+    private ImageView enableMitmButtonIV;
+
+    @FXML
+    private Button sslBypassButton;
 
     @FXML
     private ImageView sslBypassButtonIV;
 
     @FXML
-    private ImageView enableMitmButtonIV;
+    private Button apkChooserButton;
+
+    @FXML
+    private TextFlow textFLow;
 
     @FXML
     void settingClick(ActionEvent event) {
@@ -266,6 +290,14 @@ public class FxMainController {
         public <T> void receivedData(int code, boolean isSuccess, T data) {
 
             Text text_1 = new Text(String.valueOf(data)+"\n");
+
+            text_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    SystemUtility.copyToClipboard(text_1.getText(),textFLow);
+                }
+            });
+
             text_1.setTextAlignment(TextAlignment.LEFT);
 
             if(isSuccess){
@@ -286,6 +318,133 @@ public class FxMainController {
     private void changeImage(ImageView imageView, String imageName){
         Image image=new Image(imageName);
         imageView.setImage(image);
+    }
+
+
+
+
+    @FXML
+    void initialize(){
+        initBasicApkInfo();
+        initPermissionInfo();
+        initActivityListInfo();
+        initServiceListInfo();
+        initNativeListInfo();
+    }
+
+    private void initPermissionInfo() {
+        ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                new KeyValue("","----")
+
+        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
+        try {
+            Node root=loader.load();
+            permissionInfoTab.setContent(root);
+            BasicAndroidAppInfoController _appController = loader.getController();
+            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+                @Override
+                public <T> void receivedData(int code, boolean isSuccess, T data) {
+                    System.out.println(data);
+                }
+            }));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initActivityListInfo() {
+        ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                new KeyValue("","----")
+
+        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
+        try {
+            Node root=loader.load();
+            activityTabList.setContent(root);
+            BasicAndroidAppInfoController _appController = loader.getController();
+            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+                @Override
+                public <T> void receivedData(int code, boolean isSuccess, T data) {
+                    System.out.println(data);
+                }
+            }));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initServiceListInfo() {
+        ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                new KeyValue("","----")
+
+        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
+        try {
+            Node root=loader.load();
+            serviceListTab.setContent(root);
+            BasicAndroidAppInfoController _appController = loader.getController();
+            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+                @Override
+                public <T> void receivedData(int code, boolean isSuccess, T data) {
+                    System.out.println(data);
+                }
+            }));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initNativeListInfo() {
+        ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                new KeyValue("","----")
+
+        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
+        try {
+            Node root=loader.load();
+            nativeLibListTab.setContent(root);
+            BasicAndroidAppInfoController _appController = loader.getController();
+            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+                @Override
+                public <T> void receivedData(int code, boolean isSuccess, T data) {
+                    System.out.println(data);
+                }
+            }));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initBasicApkInfo() {
+
+        ObservableList<KeyValue> items = FXCollections.observableArrayList (
+                new KeyValue("App Name","----"),
+                new KeyValue("Package Name","----"),
+                new KeyValue("Application Class","----"),
+                new KeyValue("Main Activity","----"),
+                new KeyValue("Min SDK","----"),
+                new KeyValue("Target SDK","----"),
+                new KeyValue("Version Name","----"),
+                new KeyValue("Version Code","----"),
+                new KeyValue("APK Size","----")
+
+        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appInfo/basicAndroidAppInfo.fxml"));
+        try {
+            Node root=loader.load();
+            apkBasicInfoTab.setContent(root);
+            BasicAndroidAppInfoController _appController = loader.getController();
+            _appController.setData(items, (listview)->new KeyValueListCell(new ICallback() {
+                @Override
+                public <T> void receivedData(int code, boolean isSuccess, T data) {
+                    System.out.println(data);
+                }
+            }));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

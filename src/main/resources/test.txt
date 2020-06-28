@@ -1,0 +1,56 @@
+ <children>
+                                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="App Name" />
+                                                                              <Button fx:id="infoBtnAppName" contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Package Name" />
+                                                                              <Button fx:id="infoBtninfoBtnPackage" contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="37.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Application Class" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="99.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Main Activity" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="62.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Min  SDK" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="25.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max SDK" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="136.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Version Name" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="210.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Version Code" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="173.0" spacing="10.0">
+                                                                           <children>
+                                                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="APK Size" />
+                                                                              <Button contentDisplay="CENTER" mnemonicParsing="false" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>

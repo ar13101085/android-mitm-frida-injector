@@ -7,6 +7,8 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class FxApp extends Application {
     @FXML
     FxMainController mainController;
@@ -61,6 +63,18 @@ public class FxApp extends Application {
             stage.getScene().setRoot(pane);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static Parent getParentFromXml(String name){
+
+        try {
+            Parent pane = FXMLLoader.load(
+                    FxApp.class.getResource(name+".fxml"));
+            return pane;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
