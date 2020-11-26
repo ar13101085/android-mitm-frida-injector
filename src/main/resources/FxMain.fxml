@@ -49,7 +49,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open in explorer">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onAction="#openWithFileExplorer" prefHeight="94.0" prefWidth="154.0" text="Open in explorer">
                      <graphic>
                         <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open with JD-GUI">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onAction="#openWithJadx" prefHeight="94.0" prefWidth="154.0" text="Open with JD-GUI">
                      <graphic>
                         <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -67,7 +67,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="154.0" text="Open with VSCode">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onAction="#openWIthVsCode" prefHeight="94.0" prefWidth="154.0" text="Open with VSCode">
                      <graphic>
                         <ImageView fitHeight="97.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -293,6 +293,11 @@
                               </TextFlow>
                            </content>
                         </ScrollPane>
+                        <Button mnemonicParsing="false" onAction="#clearAllLog" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
                      </children></AnchorPane>
               </items>
             </SplitPane>

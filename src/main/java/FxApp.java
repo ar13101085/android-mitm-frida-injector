@@ -7,6 +7,7 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class FxApp extends Application {
@@ -26,6 +27,7 @@ public class FxApp extends Application {
     private void showWindow() {
         try {
             FXMLLoader fxmlLoader= new FXMLLoader();
+            //System.out.println(FxApp.class.getResource("av").toString());
             fxmlLoader.setLocation(FxApp.class.getResource("FxMain.fxml"));
             primaryLayout=fxmlLoader.load();
             Scene scene=new Scene(primaryLayout);

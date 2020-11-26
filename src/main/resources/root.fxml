@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="settingController">
+<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="settingController">
    <children>
       <VBox style="-fx-border-color: black;">
          <children>
@@ -113,5 +111,45 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
+      <VBox layoutX="15.0" layoutY="217.0" spacing="5.0" style="-fx-border-color: black;">
+         <children>
+            <HBox alignment="BASELINE_CENTER" spacing="21.0">
+               <children>
+                  <Label text="Keystore File">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <TextField fx:id="keystoreFilePathTextField" prefHeight="27.0" prefWidth="462.0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <Button fx:id="vsCodeButton1" mnemonicParsing="false" onAction="#chooseKeystoreFile" text="Browse">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Button>
+            <TextField fx:id="keyAliasTextField" promptText="Key Alias" />
+            <TextField fx:id="keyPasswordTextField" layoutX="16.0" layoutY="95.0" promptText="Key Password" />
+            <TextField fx:id="keyStorePasswordTextField" layoutX="16.0" layoutY="122.0" promptText="Key Store Password" />
+            <HBox alignment="TOP_RIGHT" spacing="10.0">
+               <children>
+                  <Button fx:id="cancelButton1" mnemonicParsing="false" onAction="#signingCancelButtonClick" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#signingSaveButtonClick" text="Save" />
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </VBox>
    </children>
 </VBox>

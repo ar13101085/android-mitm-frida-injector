@@ -70,8 +70,5 @@ public class KeyValueListCell extends ListCell<KeyValue> {
         nameLabel.setTextFill(Color.BLACK);
         setGraphic(rootPane);
 
-
-
-
     }
 }

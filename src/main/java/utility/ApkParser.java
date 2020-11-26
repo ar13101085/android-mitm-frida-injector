@@ -18,7 +18,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
@@ -232,9 +235,45 @@ public class ApkParser {
             tweeksController.runCmd(buildCmd);
         }
 
-        String signingCmd="java -jar "+ConfigUtility.getToolsDir()+"uber-apk-signer.jar -a "+_apkFileManager.getBuildApkPath();
+        String signingCmd="";
+        Properties properties=ConfigUtility.getProperties();
+        String keystore= properties.getOrDefault("src.keystore","").toString();
+        if(keystore.length()>0){
+            String keyAlias=properties.getOrDefault("src.keyAlias","").toString();
+            String keyPassword=properties.getOrDefault("src.keyPassword","").toString();
+            String keyStorePassword=properties.getOrDefault("src.keystorePassword","").toString();
+           // signingCmd="java -jar '"+ConfigUtility.getToolsDir()+"uber-apk-signer.jar' -a '"+_apkFileManager.getBuildApkPath()+"' --ks '"+keystore+"' --ksAlias '"+keyAlias+"' --ksKeyPass '"+keyPassword+"' --ksPass '"+keyStorePassword+"'";
+            signingCmd="java -jar "+ConfigUtility.getToolsDir()+"uber-apk-signer.jar -a "+_apkFileManager.getBuildApkPath()+" --ks "+keystore+" --ksAlias "+keyAlias+" --ksKeyPass "+keyPassword+" --ksPass "+keyStorePassword+"";
+        }else{
+            signingCmd="java -jar "+ConfigUtility.getToolsDir()+"uber-apk-signer.jar -a "+_apkFileManager.getBuildApkPath();
+        }
+        System.out.println(signingCmd);
         tweeksController.runCmd(signingCmd);
+
+
     }
+
+    public void openWithVsCode(){
+        ApkTweeksController tweeksController=new ApkTweeksController(_logger);
+        String cmd="code -r "+_apkFileManager.getDecompileDir();
+        tweeksController.runCmd(cmd);
+    }
+
+   public void openWithJadX(){
+       ApkTweeksController tweeksController=new ApkTweeksController(_logger);
+       String cmd="java -jar "+ConfigUtility.getToolsDir()+"jadx/jadx-gui-1.0.0.jar "+_apkFileManager.getApkPath();
+       tweeksController.runCmd(cmd);
+   }
+
+   public void openWithExplorer(){
+       try {
+           Desktop desktop = Desktop.getDesktop();
+           desktop.browseFileDirectory(new File(_apkFileManager.getDecompileDir()));
+
+       } catch (Exception e) {
+
+       }
+   }
 
 
 

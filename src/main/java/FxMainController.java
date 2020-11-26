@@ -247,6 +247,27 @@ public class FxMainController {
         checkApkStatus();
     }
 
+    @FXML
+    void openWIthVsCode(ActionEvent event) {
+        _apkParser.openWithVsCode();
+    }
+
+    @FXML
+    void openWithJadx(ActionEvent event) {
+        _apkParser.openWithJadX();
+    }
+
+    @FXML
+    void openWithFileExplorer(ActionEvent event) {
+        _apkParser.openWithExplorer();
+    }
+
+    @FXML
+    void clearAllLog(ActionEvent event) {
+        textFLow.getChildren().clear();
+    }
+
+
     private void apkSignatureBypassLoadApkDialog(File mainApk,File bypassApk){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Signature bypass apk found.Do you want to load this apk?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();

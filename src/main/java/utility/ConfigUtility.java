@@ -18,6 +18,10 @@ public class ConfigUtility {
                 properties.setProperty("src.adb", "");
                 properties.setProperty("src.jadx", "");
                 properties.setProperty("src.vscode", "");
+                properties.setProperty("src.keystore", "");
+                properties.setProperty("src.keyAlias", "");
+                properties.setProperty("src.keyPassword", "");
+                properties.setProperty("src.keystorePassword", "");
                 updateProperties(properties);
             }
 
