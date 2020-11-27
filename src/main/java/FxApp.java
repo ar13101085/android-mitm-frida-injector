@@ -6,9 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utility.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class FxApp extends Application {
     @FXML
@@ -21,7 +23,6 @@ public class FxApp extends Application {
         this.primaryStage.setTitle("AR-MITM-FRIDA");
         System.out.println("App is running..");
         showWindow();
-        //changeScreen("FxMain.fxml");
     }
 
     private void showWindow() {

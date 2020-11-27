@@ -26,7 +26,13 @@ public class ApkFileManager {
     }
 
     public String getFinalBuildSignedPath(){
-        return getRootDir()+"/"+getApkName(apkFile)+"_out-aligned-debugSigned.apk";
+        String buildApk=getRootDir()+"/"+getApkName(apkFile)+"_out-aligned-debugSigned.apk";
+        if(new File(buildApk).exists()){
+            return buildApk;
+        }else{
+            return getRootDir()+"/"+getApkName(apkFile)+"_out-aligned-signed.apk";
+        }
+
     }
 
     public String getSignatureBypassApkPath(){

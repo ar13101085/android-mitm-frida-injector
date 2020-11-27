@@ -220,7 +220,7 @@ public class ApkParser {
     public void installApkToDevice(){
         Properties properties=ConfigUtility.getProperties();
         String adbPath=properties.getProperty("src.adb");
-        String cmd=adbPath + " install "+_apkFileManager.getFinalBuildSignedPath();
+        String cmd=adbPath + " install -r -d "+_apkFileManager.getFinalBuildSignedPath();
         ApkTweeksController tweeksController=new ApkTweeksController(_logger);
         tweeksController.runCmd(cmd);
     }

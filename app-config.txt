@@ -1,9 +1,8 @@
-#Thu Nov 26 21:22:11 BDT 2020
+#Thu Nov 26 22:34:44 BDT 2020
 src.keyAlias=\!S1s1sps
-src.jadx=
-src.tools=/Users/hello/Documents/Decompile/tools/
+src.jadx=/Users/hello/Documents/Programming/android/aos-optv/AOS_OPTV_1.0.0.apk
 src.keyPassword=\!S1s1sps
-src.adb=
 src.keystorePassword=\!S1s1sps
+src.adb=/Users/hello/Documents/Programming/android/aos-optv/AOS_OPTV_1.0.0.apk
 src.keystore=/Users/hello/Documents/Programming/android/aos-tv-keystore.keystore
-src.vscode=
+src.vscode=/Users/hello/Documents/Programming/android/aos-optv/readme-convertapp.txt
