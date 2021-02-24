@@ -12,4 +12,5 @@ java -jar mitm-f.jar *.apk -d
 -m mitm disable
 
 
-/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home
+Download tools directory
+https://drive.google.com/file/d/1gK-06PV6o6eYZXoxeyX7BAGaGdbbsUAf/view?usp=sharing
