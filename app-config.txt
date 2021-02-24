@@ -1,8 +1,9 @@
-#Thu Nov 26 22:34:44 BDT 2020
+#Wed Feb 24 17:44:01 BDT 2021
 src.keyAlias=\!S1s1sps
-src.jadx=/Users/hello/Documents/Programming/android/aos-optv/AOS_OPTV_1.0.0.apk
+src.jadx=E\:\\mitm\\Jadx\\jadx-gui-1.0.0.jar
+src.tools=E\:\\mitm\\
 src.keyPassword=\!S1s1sps
 src.keystorePassword=\!S1s1sps
-src.adb=/Users/hello/Documents/Programming/android/aos-optv/AOS_OPTV_1.0.0.apk
-src.keystore=/Users/hello/Documents/Programming/android/aos-tv-keystore.keystore
-src.vscode=/Users/hello/Documents/Programming/android/aos-optv/readme-convertapp.txt
+src.adb=C\:\\SDK\\platform-tools\\adb.exe
+src.keystore=F\:\\aos-tv-keystore.keystore
+src.vscode=C\:\\Users\\ar131\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe

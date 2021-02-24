@@ -129,7 +129,7 @@ public class ApkParser {
         for (File singleFile:file.listFiles()
         ) {
             if(singleFile.isDirectory() && singleFile.getName().startsWith("smali")){
-                File classFile=new File(_apkFileManager.getDecompileDir()+"/"+singleFile.getName()+"/"+className.replace(".","/")+".smali");
+                File classFile=new File(_apkFileManager.getDecompileDir()+File.separator+singleFile.getName()+File.separator+className.replace(".","/")+".smali");
                 if(classFile.exists()){
                     className=classFile.getAbsolutePath();
                     CmdExecutor.debugLog("Class name "+className);
@@ -256,22 +256,26 @@ public class ApkParser {
     public void openWithVsCode(){
         ApkTweeksController tweeksController=new ApkTweeksController(_logger);
         String cmd="code -r "+_apkFileManager.getDecompileDir();
-        tweeksController.runCmd(cmd);
+        if(DesktopApi.getOs()== DesktopApi.EnumOS.windows){
+            cmd = ConfigUtility.getProperties().getProperty("src.vscode")+" -r "+_apkFileManager.getDecompileDir();
+        }
+        tweeksController.runCmdAsync(cmd);
     }
 
    public void openWithJadX(){
        ApkTweeksController tweeksController=new ApkTweeksController(_logger);
        String cmd="java -jar "+ConfigUtility.getToolsDir()+"jadx/jadx-gui-1.0.0.jar "+_apkFileManager.getApkPath();
-       tweeksController.runCmd(cmd);
+       tweeksController.runCmdAsync(cmd);
    }
 
    public void openWithExplorer(){
        try {
-           Desktop desktop = Desktop.getDesktop();
-           desktop.browseFileDirectory(new File(_apkFileManager.getDecompileDir()));
+//           Desktop desktop = Desktop.getDesktop();
+//           desktop.browseFileDirectory(new File(_apkFileManager.getDecompileDir()));
+           DesktopApi.open(new File(_apkFileManager.getDecompileDir()));
 
        } catch (Exception e) {
-
+           e.printStackTrace();
        }
    }
 

@@ -43,4 +43,12 @@ public class ApkTweeksController {
         return -1;
     }
 
+    public void runCmdAsync(String cmd){
+        try {
+            Process process = Runtime.getRuntime().exec(cmd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

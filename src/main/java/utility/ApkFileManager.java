@@ -22,26 +22,27 @@ public class ApkFileManager {
     }
 
     public String getBuildApkPath(){
-        return getRootDir()+"/"+getApkName(apkFile)+"_out.apk";
+        return getRootDir()+File.separator+getApkName(apkFile)+"_out.apk";
     }
 
     public String getFinalBuildSignedPath(){
-        String buildApk=getRootDir()+"/"+getApkName(apkFile)+"_out-aligned-debugSigned.apk";
+        String buildApk=getRootDir()+File.separator+getApkName(apkFile)+"_out-aligned-debugSigned.apk";
         if(new File(buildApk).exists()){
             return buildApk;
         }else{
-            return getRootDir()+"/"+getApkName(apkFile)+"_out-aligned-signed.apk";
+            return getRootDir()+File.separator+getApkName(apkFile)+"_out-aligned-signed.apk";
         }
 
     }
 
     public String getSignatureBypassApkPath(){
         String file=apkFile.getAbsolutePath().replace("_out_sb","");
-        return getRootDir()+"/"+getApkName(new File(file))+"_out_sb.apk";
+        return getRootDir()+File.separator+getApkName(new File(file))+"_out_sb.apk";
     }
 
     public String getDecompileDir(){
-        return getRootDir()+"/"+getApkName(apkFile)+"-decompiled";
+       // return getRootDir()+File.separator+getApkName(apkFile)+"-decompiled";
+        return new File(getRootDir()+File.separator+getApkName(apkFile)+"-decompiled").getAbsolutePath();
     }
 
     public String getApkPath(){
